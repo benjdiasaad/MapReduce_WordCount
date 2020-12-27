@@ -1,11 +1,4 @@
-/*
-  M2 MBDS - Big Data/Hadoop
-	Année 2013/2014
-  --
-  TP1: exemple de programme Hadoop - compteur d'occurences de mots.
-  --
-  WCountReduce.java: classe REDUCE.
-*/
+
 package org.mbds.hadoop.wordcount;
 
 import org.apache.hadoop.io.Text;
@@ -17,5 +10,12 @@ import java.io.IOException;
 public class WCountReduce extends Reducer<Text, IntWritable, Text, Text>
 {
   public void reduce(Text key, Iterable<IntWritable> values, Context context) throws IOException, InterruptedException
-	
+	{
+		
+		Iterator<IntWritable> i=values.iterator();
+		int count=0;
+		while(i.hasNext())   
+			count+=i.next().get();   
+		context.write(key, new Text(count+" occurences."));
+  }
 }
