@@ -16,8 +16,15 @@ public class WCount
 	public static void main(String[] args) throws Exception
 	{
 		
-		Configuration conf=new Configuration();
-		String[] ourArgs=new GenericOptionsParser(conf, args).getRemainingArgs();
+				Configuration conf=new Configuration();
+				String[] ourArgs=new GenericOptionsParser(conf, args).getRemainingArgs();
+		
+				Job job=Job.getInstance(conf, "Compteur de mots v1.0");
+				
+				job.setJarByClass(WCount.class);
+				job.setMapperClass(WCountMap.class);
+				job.setReducerClass(WCountReduce.class);
+
 		
 	}
 }
