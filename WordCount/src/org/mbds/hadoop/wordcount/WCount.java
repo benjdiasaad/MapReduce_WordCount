@@ -24,6 +24,16 @@ public class WCount
 				job.setJarByClass(WCount.class);
 				job.setMapperClass(WCountMap.class);
 				job.setReducerClass(WCountReduce.class);
+				
+				job.setOutputKeyClass(Text.class);
+				job.setOutputValueClass(IntWritable.class);
+				
+				FileInputFormat.addInputPath(job, new Path(ourArgs[0]));
+				FileOutputFormat.setOutputPath(job, new Path(ourArgs[1]));
+				
+				if(job.waitForCompletion(true))
+					System.exit(0);
+				System.exit(-1);
 
 		
 	}
